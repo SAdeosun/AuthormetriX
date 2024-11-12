@@ -14,7 +14,7 @@ st.markdown("""<hr style="height:4px;border:none;color:#7F7F7F;background-color:
 #STEP 1 STARTS
 st.markdown ("### STEP 1")
 st.markdown ("**Upload the corpus to be analyzed (*Scopus download*), from which authors' metrics will be obtained.**")
-corpus_uploaded = st.file_uploader ("", type = [".csv", ".xlsx", ".xls"])
+corpus_uploaded = st.file_uploader ("", type = [".csv"])  # Removed ".xlsx", ".xls" types for now, maybe I'll incorporate those later, just needs a few more lines of conditions
 
 #Function to preprocess the uploaded corpus file
 def preprocess_corpus (corpus_uploaded):
@@ -67,7 +67,7 @@ if corpus_uploaded is not None:
   #STEP 3 STARTS
   st.markdown ("### STEP 3")
   st.markdown ("**Upload the csv file with the list of author Scopus IDs to be analysed. <u>IDs must be in the first column of the worksheet; only one ID per row.**</u>" ,unsafe_allow_html=True)
-  IDs_list = st.file_uploader (".", type = [".csv", ".xlsx", ".xls"])
+  IDs_list = st.file_uploader (".", type = [".csv"]) # Removed ".xlsx", ".xls" types for now, maybe I'll incorporate those later, just needs a few more lines of conditions
 
   #Function to further process corpus, to make columns needed to calculate the the author metrics.
   #I NEED TO CHECK WHETHER THERE IS A PROBLEM/POTENTIAL PROBLEM WITH MAKING THE STRIPPED FIRST_AUTHOR_ID AN INTEGER
