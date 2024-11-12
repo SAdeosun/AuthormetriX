@@ -95,7 +95,7 @@ if corpus_uploaded is not None:
   #Function to calculate the cummulative fractional output (CFO)
   def calculate_CFO (df_id, df_data):
     # Initialize the 'total_fractional_output' column with zeros
-    df_id['cummulative_fractional_output'] = 0
+    df_id['total_fractional_output'] = 0
     # Loop through each ID in df_id
     for i in range(len(df_id)):
         id_value = str(df_id.loc[i, 'ID'])
@@ -104,7 +104,7 @@ if corpus_uploaded is not None:
         # Sum the 'score' for these rows
         total_score = df_data.loc[mask, 'fractional_credit'].sum()
         # Update the 'Appearances' column in df_id
-        df_id.loc[i, 'cummulative_fractional_output'] = total_score
+        df_id.loc[i, 'total_fractional_output'] = total_score
 
     return df_id
 
@@ -123,10 +123,10 @@ if corpus_uploaded is not None:
     extract_publication_counts(corpus01_doctype, IDs_list)
     calculate_CFO (IDs_list, corpus01_doctype)
     #Calculate collaborative coefficient
-    IDs_list['collaborative_coefficient'] = 1-(IDs_list['cummulative_fractional_output']/IDs_list['all_publications'])
+    IDs_list['collaborative_coefficient'] = 1-(IDs_list['total_fractional_output']/IDs_list['all_publications'])
     #These lines clean up non-number characters from the cells, and makes sure that all numbers are to 4 decimal places 
     IDs_list['collaborative_coefficient'] = IDs_list['collaborative_coefficient'].round(4).astype('float')
-    IDs_list['cummulative_fractional_output'] = IDs_list['cummulative_fractional_output'].round(4).astype('float')
+    IDs_list['total_fractional_output'] = IDs_list['total_fractional_output'].round(4).astype('float')
 
     #st.write ("To download the authors' metrics, hover mouse on the top of the right corner of the table")
     if st.button ("Calculate and show authors' metrics!"):
